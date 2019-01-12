@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProviderController {
 
     @RequestMapping("/hello/cloud")
-    public String index(){
-        return "hello cloud";
+    public String index(String invokName){
+        return invokName +  " say hello spring cloud";
     }
 }

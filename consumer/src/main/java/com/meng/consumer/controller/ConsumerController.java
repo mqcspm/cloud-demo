@@ -12,8 +12,8 @@ public class ConsumerController {
     RemoteClient remoteClient;
 
     @RequestMapping("/")
-    public String index(){
-        return remoteClient.index();
+    public String index(String invokName){
+        return remoteClient.index(invokName);
     }
 
 }
