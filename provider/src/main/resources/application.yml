@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: provider
+
+#将服务暴露出去
+provider:
+  ribbon:
+    listOfServers: http://localhost:8090
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8081/eureka/
