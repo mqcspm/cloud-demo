@@ -5,6 +5,14 @@ spring:
 server:
   port: 8082
 
+ribbon:
+  #设置超时时间
+  ReadTimeout: 10000
+  #设置超时重试次数：MaxAutoRetries +  MaxAutoRetriesNextServer(默认重试一次) + (MaxAutoRetries * MaxAutoRetriesNextServer)
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 0
+
+#注册中心
 eureka:
   client:
     service-url:
