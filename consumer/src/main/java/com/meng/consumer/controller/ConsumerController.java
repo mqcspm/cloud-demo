@@ -16,4 +16,9 @@ public class ConsumerController {
         return remoteClient.index(invokName);
     }
 
+    @RequestMapping("/zuul")
+    public String zuul(){
+        return "zuul ---> consumer";
+    }
+
 }

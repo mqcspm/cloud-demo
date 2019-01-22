@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: zuul
+
+server:
+  port: 8888
+
+#访问 localhost:8888/consumer/** 全部映射至 consumer服务
+zuul:
+  routes:
+    consumer:
+      path: /consumer/**
+      serviceId: consumer
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka/
+
