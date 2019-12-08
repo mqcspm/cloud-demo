@@ -1,19 +1,33 @@
 spring:
   application:
     name: zuul
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
 
 server:
   port: 8888
 
 #访问 localhost:8888/consumer/** 全部映射至 consumer服务
 zuul:
+  #路由规则配置
   routes:
     consumer:
       path: /consumer/**
+      #服务id
       serviceId: consumer
 
+  #配置过滤器是否启用 true：是不启用  false：启用
+  LoginFilter:
+    pre:
+      disable: false
+
+#注册中心
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8081/eureka/
+
 

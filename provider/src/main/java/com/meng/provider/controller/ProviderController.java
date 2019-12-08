@@ -11,6 +11,8 @@ public class ProviderController {
 
     @Autowired
     ApplicationContext applicationContext;
+
+
     @RequestMapping("/hello/cloud")
     public String index(String invokName){
         applicationContext.publishEvent(new MyEvent(this, invokName));
