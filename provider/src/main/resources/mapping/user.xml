@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--User的映射-->
+<mapper namespace="com.meng.provider.mapper.UserMapper">
+	<resultMap id="UserMap" type="com.meng.provider.entity.User">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="passwork" property="passwork" jdbcType="VARCHAR" />
+		<result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+		<result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<!-- 抽取表名 -->
+	<sql id="tableName">
+		user
+	</sql>
+
+	<!--抽取公共表字段 -->
+	<sql id="columns">
+		ID,
+		USERNAME,
+		PASSWORK,
+		GMT_CREATE,
+		GMT_MODIFY
+	</sql>
+
+	<!-- 抽取公共实体类属性 -->
+	<sql id="javaProps">
+		#{id,jdbcType=INTEGER},
+		#{username,jdbcType=VARCHAR},
+		#{passwork,jdbcType=VARCHAR},
+		#{gmtCreate,jdbcType=TIMESTAMP},
+		#{gmtModify,jdbcType=TIMESTAMP}
+	</sql>
+
+	<!-- 条件 -->
+	<sql id="condition">
+		<if test="username!= null">
+			USERNAME = #{username,jdbcType=VARCHAR},
+		</if>
+		<if test="passwork!= null">
+			PASSWORK = #{passwork,jdbcType=VARCHAR},
+		</if>
+		<if test="gmtCreate!= null">
+			GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
+		</if>
+		<if test="gmtModify!= null">
+			GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP},
+		</if>
+	</sql>
+
+	<!-- 条件 -->
+	<sql id="whereCondition">
+		<if test="id!= null">
+			 AND ID = #{id,jdbcType=INTEGER}
+		</if>
+		<if test="username!= null">
+			 AND USERNAME = #{username,jdbcType=VARCHAR}
+		</if>
+		<if test="passwork!= null">
+			 AND PASSWORK = #{passwork,jdbcType=VARCHAR}
+		</if>
+		<if test="gmtCreate!= null">
+			 AND GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="gmtModify!= null">
+			 AND GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP}
+		</if>
+	</sql>
+
+	
+	<!-- 插入 -->
+	<insert id="insertUser" parameterType="com.meng.provider.entity.User" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			<include refid="tableName" />
+		(
+			<include refid="columns" />
+		)
+		VALUES
+		(
+			<include refid="javaProps" />
+		)
+	</insert>
+
+	<!-- 根据id更新信息 -->
+	<update id="updateUserById" parameterType="java.lang.Integer">
+		UPDATE
+			<include refid="tableName" />
+		<set>
+			<include refid="condition" />
+		</set>
+		WHERE
+			ID = #{id,jdbcType=INTEGER}
+		LIMIT 1
+	</update>
+
+	<!-- 根据id查找对应的信息 -->
+	<select id="selectUserById" resultMap="UserMap" parameterType="java.lang.Integer">
+		SELECT
+			<include refid="columns" />
+		FROM
+			<include refid="tableName" />
+		WHERE
+			ID = #{id,jdbcType=INTEGER}
+		LIMIT 1
+	</select>
+
+	<!-- 根据条件查询记录 -->
+	<select id="selectUserListByCond" resultMap="UserMap" parameterType="com.meng.provider.entity.User">
+		SELECT
+			<include refid="columns" />
+		FROM
+			<include refid="tableName" />
+		<where> 1=1
+			<include refid="whereCondition" />
+		</where>
+	</select>
+
+	<!-- 根据条件查询记录数 -->
+	<select id="selectUserCntByCond" resultType="java.lang.Integer" parameterType="com.meng.provider.entity.User">
+		SELECT
+			COUNT(*)
+		FROM
+			<include refid="tableName" />
+		<where> 1=1
+			<include refid="whereCondition" />
+		</where>
+	</select>
+
+</mapper>
+

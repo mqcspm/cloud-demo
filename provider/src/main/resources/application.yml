@@ -31,6 +31,7 @@ spring:
       max-open-prepared-statements: 50
       max-pool-prepared-statement-per-connection-size: 20
 
+
 #将服务暴露出去
 provider:
   ribbon:
@@ -44,4 +45,7 @@ eureka:
     service-url:
       defaultZone: http://localhost:8081/eureka/
 
-#提交测试
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.meng.provider.entity
