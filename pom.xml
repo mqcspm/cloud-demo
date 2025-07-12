@@ -24,7 +24,7 @@
         <alibaba.druid.version>1.1.10</alibaba.druid.version>
         <mysql.version>5.1.47</mysql.version>
         <fastjson.verson>1.2.47</fastjson.verson>
-        <commons-lang3.version>3.7</commons-lang3.version>
+        <commons-lang3.version>3.18.0</commons-lang3.version>
     </properties>
 
     <modules>
